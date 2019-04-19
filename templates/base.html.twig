@@ -4,10 +4,55 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav>
+              <div class="nav-wrapper">
+                <a href="{{ path('homepage') }}" class="brand-logo">Vendredi</a>
+                <ul class="right hide-on-med-and-down">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path("app_logout") }}" class="waves-effect waves-light btn red lighten-3"><i class="material-icons">power_settings_new</i></a></li>
+                    {% else %}
+                        <li><a class="waves-effect waves-light btn teal darken-2" href="{{ path("app_login") }}">Connexion</a></li>
+                        <li><a class="waves-effect waves-light btn" href="{{ path("app_register") }}">Inscription</a></li>
+                    {% endif %}
+                </ul>
+              </div>
+            </nav>
+        </header>
+        <section class="container">
+            {% block body %}{% endblock %}
+        </section>
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Contenu du footer</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Autres liens</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('mentions') }}">Mentions légales</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('contact') }}">Contact</a></li>
+                  {# <li><a class="grey-text text-lighten-3" href="{{ path('name_home') }}">Qui somme nous?</a></li> #}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2019 Copyright
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+            
         {% block javascripts %}{% endblock %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>

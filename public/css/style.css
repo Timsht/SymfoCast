@@ -1,0 +1,32 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+nav {
+    background-color: #715771;
+}
+
+nav .nav-wrapper {
+    margin: 0 10px;
+}
+
+section {
+    flex-grow: 1;
+}
+
+    /* Inputs */
+    .input-field.col label {
+        left: 1rem;
+    }
+
+    .message-connexion {
+        color:red;
+    }
+
+/* FOOTER */
+.page-footer {
+    background-color: #715771;
+}
