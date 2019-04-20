@@ -6,6 +6,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link rel="stylesheet" href="{{ asset("css/style.css") }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script
+            src="https://code.jquery.com/jquery-3.4.0.min.js"
+            integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+            crossorigin="anonymous">
+        </script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -13,9 +18,21 @@
             <nav>
               <div class="nav-wrapper">
                 <a href="{{ path('homepage') }}" class="brand-logo">Vendredi</a>
+
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!"><i class="material-icons">account_circle</i>Profil</a></li>
+                    <li><a href="#!"><i class="material-icons">settings</i>Paramètre</a></li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <li><a href="{{ path("admin") }}"><i class="material-icons">security</i>Admin</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    <li><a href="{{ path("app_logout") }}" class="waves-effect waves-light"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+                </ul>
+
                 <ul class="right hide-on-med-and-down">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path("app_logout") }}" class="waves-effect waves-light btn red lighten-3"><i class="material-icons">power_settings_new</i></a></li>
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ app.user.email }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% else %}
                         <li><a class="waves-effect waves-light btn teal darken-2" href="{{ path("app_login") }}">Connexion</a></li>
                         <li><a class="waves-effect waves-light btn" href="{{ path("app_register") }}">Inscription</a></li>
@@ -24,9 +41,11 @@
               </div>
             </nav>
         </header>
-        <section class="container">
-            {% block body %}{% endblock %}
-        </section>
+        <main>
+            <section class="container">
+                {% block body %}{% endblock %}
+            </section>
+        </main>
 
         <footer class="page-footer">
           <div class="container">
@@ -55,5 +74,6 @@
             
         {% block javascripts %}{% endblock %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="{{ asset("js/function.js") }}"></script>
     </body>
 </html>

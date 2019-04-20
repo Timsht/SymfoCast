@@ -5,26 +5,47 @@ body {
 }
 
 /* HEADER */
-nav {
-    background-color: #715771;
-}
+    /* Navbar */
+        nav {
+            background-color: #715771;
+        }
 
-nav .nav-wrapper {
-    margin: 0 10px;
-}
+        nav .nav-wrapper {
+            margin: 0 10px;
+        }
 
-section {
-    flex-grow: 1;
-}
+        nav .dropdown-trigger:focus {
+            outline: none;
+        }
 
-    /* Inputs */
-    .input-field.col label {
-        left: 1rem;
+        nav .dropdown-content li:last-child:hover {
+            background-color: #f003;
+        }
+
+        nav li {
+            width: auto;
+            white-space: nowrap;
+        }
+
+        .dropdown-content li > a > i {
+            margin: 0 15px 0 0;
+        }
+
+    /* MAIN */
+    main {
+        flex-grow: 1;
+        margin-bottom: 100px;
     }
 
-    .message-connexion {
-        color:red;
-    }
+    /* Section */
+        /* Inputs */
+        .input-field.col label {
+            left: 1rem;
+        }
+
+        .message-connexion {
+            color:red;
+        }
 
 /* FOOTER */
 .page-footer {
