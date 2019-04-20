@@ -42,16 +42,4 @@ class HomeController extends AbstractController
     {
         return $this->render("home/contact.html.twig");
     }
-
-    /**
-     * admin
-     *
-     * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
-     * @return void
-     */
-    public function admin()
-    {
-        return $this->render("home/admin.html.twig");
-    }
 }
