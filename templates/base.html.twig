@@ -19,7 +19,7 @@
               <div class="nav-wrapper">
                 <a href="{{ path('homepage') }}" class="brand-logo">Vendredi</a>
 
-                <ul id="dropdown1" class="dropdown-content">
+                <ul id="dropdown1" class="dropdown-content" data-constrainwidth="true">
                     <li><a href="#!"><i class="material-icons">account_circle</i>Profil</a></li>
                     <li><a href="#!"><i class="material-icons">settings</i>Paramètre</a></li>
                     {% if is_granted("ROLE_ADMIN") %}
@@ -32,7 +32,7 @@
                 <ul class="right hide-on-med-and-down">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <!-- Dropdown Trigger -->
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ app.user.email }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{ app.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     {% else %}
                         <li><a class="waves-effect waves-light btn teal darken-2" href="{{ path("app_login") }}">Connexion</a></li>
                         <li><a class="waves-effect waves-light btn" href="{{ path("app_register") }}">Inscription</a></li>
