@@ -1,0 +1,12 @@
+{% extends 'home/layout.html.twig' %}
+
+{% block title %}{{ app.user.username }}{% endblock %}
+
+{% block content %}
+	<h1>Paramètres : {{ app.user.username }}</h1>
+    
+    {{ form_start(formulaire) }}
+    {{ form_widget(formulaire) }}
+    <input class="btn btn-primary" type="submit" value="Valider">
+    {{ form_end(formulaire) }}
+{% endblock %}

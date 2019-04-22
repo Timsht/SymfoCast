@@ -19,15 +19,17 @@
               <div class="nav-wrapper">
                 <a href="{{ path('homepage') }}" class="brand-logo">Vendredi</a>
 
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <ul id="dropdown1" class="dropdown-content" data-constrainwidth="true">
-                    <li><a href="#!"><i class="material-icons">account_circle</i>Profil</a></li>
-                    <li><a href="#!"><i class="material-icons">settings</i>Paramètre</a></li>
+                    <li><a href="{{ path("user_profil", {'user':app.user.username} ) }}"><i class="material-icons">account_circle</i>Profil</a></li>
+                    <li><a href="{{ path("parm_user", {'id':app.user.id}) }}"><i class="material-icons">settings</i>Paramètre</a></li>
                     {% if is_granted("ROLE_ADMIN") %}
                     <li><a href="{{ path("admin") }}"><i class="material-icons">security</i>Admin</a></li>
                     {% endif %}
                     <li class="divider"></li>
                     <li><a href="{{ path("app_logout") }}" class="waves-effect waves-light"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
                 </ul>
+                {% endif %}
 
                 <ul class="right hide-on-med-and-down">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
