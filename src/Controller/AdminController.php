@@ -22,6 +22,11 @@ class AdminController extends AbstractController
 
         $users = $depot->findAll();
 
-        return $this->render("home/admin.html.twig", array('users' => $users));
+        $roles = $this->getParameter('security.role_hierarchy.roles');
+
+        return $this->render("admin/admin.html.twig", array(
+            'users' => $users,
+            'security' => $roles
+        ));
     }
 }

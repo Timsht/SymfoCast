@@ -1,0 +1,39 @@
+{% extends 'home/layout.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+	<h1>Admin</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>User id</th>
+				<th>User email</th>
+				<th>User role</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>
+						<select>
+							{% for role in security|keys %}
+								{% if app.user.roles == user.roles %}
+									<option value="{{ role|json_encode }}" selected disabled>{{ role|json_encode }}</option>
+								{% else %}
+									<option value="{{ role|json_encode }}">{{ role|json_encode }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<input type="submit" class="btn right" value="Enregistrer">
+
+{% endblock %}
