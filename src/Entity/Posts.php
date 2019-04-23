@@ -25,6 +25,7 @@ class Posts
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=3, max=255, minMessage="Le message doit faire minimum {{ limit }} caractères")
      */
     private $post;
 
@@ -34,15 +35,15 @@ class Posts
     private $date;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $valide;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valide;
 
     public function __construct()
     {
@@ -96,13 +97,6 @@ class Posts
         return $this->valide;
     }
 
-    public function setValide(bool $valide): self
-    {
-        $this->valide = $valide;
-
-        return $this;
-    }
-
     public function getAuthor(): ?author
     {
         return $this->author;
@@ -111,6 +105,13 @@ class Posts
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function setValide(bool $valide): self
+    {
+        $this->valide = $valide;
 
         return $this;
     }

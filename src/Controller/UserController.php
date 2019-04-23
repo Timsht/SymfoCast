@@ -4,8 +4,8 @@ namespace App\Controller;
 Use Symfony\Component\HttpFoundation\Response;
 Use Symfony\Component\Routing\Annotation\Route;
 Use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-Use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 Use Symfony\Component\HttpFoundation\Request;
+Use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 Use App\Entity\User;
 Use App\Entity\Posts;
 Use App\Form\RegistrationFormType;
@@ -41,8 +41,8 @@ class UserController extends AbstractController
      */
     public function profil(Request $request, string $username)
     {
-        $depot = $this->getDoctrine()->getRepository(User::class);
-        $user = $depot->findOneByUsername( $username );
+        $depotUser = $this->getDoctrine()->getRepository(User::class);
+        $user = $depotUser->findOneByUsername( $username );
         
         if ($user === null) {
             throw $this->createNotFoundException("User doesn't exist");
@@ -62,6 +62,10 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute("user_profil", array("username" => $username));
         }
+
+        $depotPost = $this->getDoctrine()->getRepository(Posts::class);
+
+        // $posts = $this->findBy(array());
 
         return $this->render("user/user.html.twig", array(
             "user" => $user,
