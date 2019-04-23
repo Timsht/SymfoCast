@@ -4,4 +4,13 @@
 
 {% block content %}
 	<h1>{{ user.username }}</h1>
+    <div class="form-post">
+        {{ form_start(formulaire) }}
+            <div class="input-field col s5">
+                {{ form_widget(formulaire.post, {'attr': {'class': 'materialize-textarea'}}) }}
+                {{ form_label(formulaire.post) }}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Valider">
+        {{ form_end(formulaire) }}
+    </div>
 {% endblock %}

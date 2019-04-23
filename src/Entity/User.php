@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100)
      */
     private $username;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Posts", mappedBy="user", orphanRemoval=true)
+     */
+    private $Postss;
+
+    public function __construct()
+    {
+        $this->Postss = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +133,37 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Posts[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPosts(Posts $Posts): self
+    {
+        if (!$this->posts->contains($Posts)) {
+            $this->posts[] = $Posts;
+            $Posts->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosts(Posts $Posts): self
+    {
+        if ($this->posts->contains($Posts)) {
+            $this->posts->removeElement($Posts);
+            // set the owning side to null (unless already changed)
+            if ($Posts->getUser() === $this) {
+                $Posts->setUser(null);
+            }
+        }
 
         return $this;
     }

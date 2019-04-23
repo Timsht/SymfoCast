@@ -7,7 +7,9 @@ Use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 Use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 Use Symfony\Component\HttpFoundation\Request;
 Use App\Entity\User;
+Use App\Entity\Posts;
 Use App\Form\RegistrationFormType;
+Use App\Form\PostType;
 
 
 
@@ -21,48 +23,49 @@ class UserController extends AbstractController
      * 
      * @return void
      */
-    public function paramUser(Request $request, $id)
+    public function paramUser(Request $request, int $id)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $depot = $this->getDoctrine()->getManager();
 
-        $user = $depot->getRepository(User::class)->find($id);
-        $formulaire = $this->createForm(RegistrationFormType::class, $user);
-
-        $formulaire->handleRequest($request);
-
-        if($formulaire->isSubmitted() && $formulaire->isValid()) {
-            $depot->flush();
-            return $this->redirectToRoute("/$user->getUsername()");
-        }
-
-        return $this->render("user/parm.html.twig",array(
-            'formulaire' => $formulaire->createView()
-        ));
-
-        // return $this->render("user/parm.html.twig");
+        return $this->render("user/parm.html.twig");
     }
 
     /**
      * User page
      *
-     * @Route("/{user}", name="user_profil")
+     * @Route("/profil/{username}", name="user_profil")
      * 
      * @return void
      */
-    public function profil(string $user)
+    public function profil(Request $request, string $username)
     {
         $depot = $this->getDoctrine()->getRepository(User::class);
-
-        $appUser = $depot->findBy(["username" => $user]);
+        $user = $depot->findOneByUsername( $username );
         
-        if ($appUser === []) {
-            return $this->render("bundles/TwigBundle/Exception/error404.html.twig");
+        if ($user === null) {
+            throw $this->createNotFoundException("User doesn't exist");
         }
+
+        $post = new Posts();
+        $formulaire = $this->createForm(PostType::class, $post);
         
-        return $this->render('user/user.html.twig', array(
-            "user" => $appUser[0]
+        $formulaire->handleRequest($request);
+        
+        if($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $post->setUser($this->getUser());
+            $post->setAuthor($user);
+            $gestionnaire = $this->getDoctrine()->getManager();
+            $gestionnaire->persist($post);
+            $gestionnaire->flush();
+
+            return $this->redirectToRoute("user_profil", array("username" => $username));
+        }
+
+        return $this->render("user/user.html.twig", array(
+            "user" => $user,
+            "formulaire" => $formulaire->createView()
         ));
     }
 

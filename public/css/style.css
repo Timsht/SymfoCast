@@ -35,11 +35,21 @@ main {
     /* Section */
     /* Inputs */
     .input-field.col label {
-        left: 1rem;
+        left: 0;
     }
 
     .message-connexion {
         color:red;
+    }
+
+    /* USER */
+    .form-post {
+        max-width: 40%;
+    }
+
+    .form-post textarea {
+        max-height: 150px;
+        overflow-y: scroll;
     }
 
 /* FOOTER */
