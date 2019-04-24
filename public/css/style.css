@@ -52,6 +52,24 @@ main {
         overflow-y: scroll;
     }
 
+    .block-form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .block-form form {
+        flex-grow: 1;
+        max-width: 500px;
+        padding: 20px 30px;
+        background-color: #e0e0e0;
+        border-radius: 3px;
+        border: 1px solid #cacaca;
+        -webkit-box-shadow: 15px 10px 73px -32px rgba(0,0,0,0.75);
+        -moz-box-shadow: 15px 10px 73px -32px rgba(0,0,0,0.75);
+        box-shadow: 15px 10px 73px -32px rgba(0,0,0,0.75);
+    }    
+
     .block-post {
         border: 1px solid rgb(185, 185, 185);
         margin: 30px 0;

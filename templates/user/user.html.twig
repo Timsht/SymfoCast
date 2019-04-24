@@ -4,7 +4,7 @@
 
 {% block content %}
 	<h1>{{ user.username }}</h1>
-    <div class="form-post">
+    <div class="block-form">
         {{ form_start(formulaire) }}
             <div class="input-field col s5">
                 {{ form_widget(formulaire.post, {'attr': {'class': 'materialize-textarea'}}) }}
@@ -17,7 +17,7 @@
     <div class="block-posts">
         {% for post in posts %}
             <div class="block-post">
-                <span>{{ post.author.username }}</span>
+                <a href="{{ path("user_profil", {username: post.author.username }) }}"><span>{{ post.author.username }}</span></a>
                 <span class="date-post">{{ post.date.date | date('d/m/Y H:i') }}</span>
                 <p>{{ post.post }}</p>
             </div>
