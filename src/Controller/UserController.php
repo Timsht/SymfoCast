@@ -54,8 +54,8 @@ class UserController extends AbstractController
         $formulaire->handleRequest($request);
         
         if($formulaire->isSubmitted() && $formulaire->isValid()) {
-            $post->setUser($this->getUser());
-            $post->setAuthor($user);
+            $post->setUser($user);
+            $post->setAuthor($this->getUser());
             $gestionnaire = $this->getDoctrine()->getManager();
             $gestionnaire->persist($post);
             $gestionnaire->flush();

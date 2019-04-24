@@ -18,7 +18,7 @@
         {% for post in posts %}
             <div class="block-post">
                 <span>{{ post.author.username }}</span>
-                <span class="date-post">{{ post.date.date | date('d/m/Y H:m') }}</span>
+                <span class="date-post">{{ post.date.date | date('d/m/Y H:i') }}</span>
                 <p>{{ post.post }}</p>
             </div>
         {% endfor %}
