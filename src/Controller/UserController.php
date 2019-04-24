@@ -65,11 +65,12 @@ class UserController extends AbstractController
 
         $depotPost = $this->getDoctrine()->getRepository(Posts::class);
 
-        // $posts = $this->findBy(array());
+        $posts = $depotPost->findBy(array("user" => $user), array('id' => 'DESC'));
 
         return $this->render("user/user.html.twig", array(
             "user" => $user,
-            "formulaire" => $formulaire->createView()
+            "formulaire" => $formulaire->createView(),
+            "posts" => $posts
         ));
     }
 

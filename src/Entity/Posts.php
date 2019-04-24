@@ -97,7 +97,7 @@ class Posts
         return $this->valide;
     }
 
-    public function getAuthor(): ?author
+    public function getAuthor(): ?user
     {
         return $this->author;
     }

@@ -45,11 +45,11 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Posts", mappedBy="user", orphanRemoval=true)
      */
-    private $Posts;
+    private $posts;
 
     public function __construct()
     {
-        $this->Posts = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int

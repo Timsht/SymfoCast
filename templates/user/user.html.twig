@@ -13,4 +13,14 @@
             <input class="btn btn-primary" type="submit" value="Valider">
         {{ form_end(formulaire) }}
     </div>
+
+    <div class="block-posts">
+        {% for post in posts %}
+            <div class="block-post">
+                <span>{{ post.author.username }}</span>
+                <span class="date-post">{{ post.date.date | date('d/m/Y H:m') }}</span>
+                <p>{{ post.post }}</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
