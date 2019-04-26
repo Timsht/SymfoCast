@@ -1,0 +1,14 @@
+{% extends 'home/layout.html.twig' %}
+
+{% block title %}{{ app.user.username }}{% endblock %}
+
+{% block content %}
+    <section>
+        {{ form_start(formComment) }}
+            <div class="input-field col s5">
+                {{ form_widget(formComment) }}
+                <input class="btn btn-primary" type="submit" value="Envoyer">
+            </div>
+        {{ form_end(formComment) }}
+    </section>
+{% endblock %}

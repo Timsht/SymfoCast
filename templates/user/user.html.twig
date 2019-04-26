@@ -3,24 +3,45 @@
 {% block title %}{{ app.user.username }}{% endblock %}
 
 {% block content %}
-	<h1>{{ user.username }}</h1>
-    <div class="block-form">
-        {{ form_start(formulaire) }}
-            <div class="input-field col s5">
-                {{ form_widget(formulaire.post, {'attr': {'class': 'materialize-textarea'}}) }}
-                {{ form_label(formulaire.post) }}
-            </div>
-            <input class="btn btn-primary" type="submit" value="Valider">
-        {{ form_end(formulaire) }}
-    </div>
-
-    <div class="block-posts">
-        {% for post in posts %}
-            <div class="block-post">
-                <a href="{{ path("user_profil", {username: post.author.username }) }}"><span>{{ post.author.username }}</span></a>
-                <span class="date-post">{{ post.date.date | date('d/m/Y H:i') }}</span>
-                <p>{{ post.post }}</p>
-            </div>
+    <aside>
+        <h3>Les autres utilisateurs : </h3>
+        {% for user in users %}
+            <ul>
+                {% if user.username != app.user.username %}
+                    <li><a href="{{ path("user_profil", {username: user.username }) }}">{{user.username}}</a></li>
+                {% endif %}
+            </ul>
         {% endfor %}
-    </div>
+    </aside>
+    <section>
+        <h1>{{ user.username }}</h1>
+        <div class="block-form">
+            {{ form_start(formulaire) }}
+                <div class="input-field col s5">
+                    {{ form_widget(formulaire.post, {'attr': {'class': 'materialize-textarea'}}) }}
+                    {{ form_label(formulaire.post) }}
+                </div>
+                <input class="btn btn-primary" type="submit" value="Valider">
+            {{ form_end(formulaire) }}
+        </div>
+
+        <div class="block-posts">
+            {% for post in posts %}
+                <div class="block-post">
+                    <a href="{{ path("user_profil", {username: post.author.username }) }}"><span>{{ post.author.username }}</span></a>
+                    <span class="date-post">{{ post.date.date | date('d/m/Y H:i') }}</span>
+                    <p>{{ post.post }}</p>
+                    
+                    <hr/>
+                    <a href="{{ path("comment", {'username': app.user.username, 'id':post.id} ) }}" class="btn-small waves-effect waves-light" >Commenter</a>
+                    {% for comment in post.comments %}
+                        <div class="block-comment">
+                            <p>{{ comment.author.username }}<span class="date-comment">{{ comment.date.date | date('d/m/Y H:i') }}</span></p>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
