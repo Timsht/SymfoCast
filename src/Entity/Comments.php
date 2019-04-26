@@ -24,6 +24,7 @@ class Comments
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=3, max=100, minMessage="Le message doit faire minimum {{ limit }} caractères")
      */
     private $content;
 
