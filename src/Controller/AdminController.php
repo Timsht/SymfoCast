@@ -13,7 +13,7 @@ class AdminController extends AbstractController
 {
     /**
      * admin
-     *
+     * 
      * @Route("/admin", name="admin")
      * @IsGranted("ROLE_ADMIN")
      * @return void
