@@ -11,36 +11,36 @@ Use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController
 {
-    /**
-     * admin
-     * 
-     * @Route("/admin", name="admin")
-     * @IsGranted("ROLE_ADMIN")
-     * @return void
-     */
-    public function admin(Request $request)
-    {
-        $depot = $this->getDoctrine()->getRepository(User::class);
+    // /**
+    //  * admin
+    //  * 
+    //  * @Route("/admin", name="admin")
+    //  * @IsGranted("ROLE_ADMIN")
+    //  * @return void
+    //  */
+    // public function admin(Request $request)
+    // {
+    //     $depot = $this->getDoctrine()->getRepository(User::class);
 
-        $users = $depot->findAll();
-        $roles = $this->getParameter('security.role_hierarchy.roles');
+    //     $users = $depot->findAll();
+    //     $roles = $this->getParameter('security.role_hierarchy.roles');
 
-        // foreach($users as $key => $user) {
-        //     $formulaire = array();
-        //     $formulaire[] = $this->createForm(UpdateUsersType::class, $user);    
-        //     $formulaire[$key]->handleRequest($request);
+    //     // foreach($users as $key => $user) {
+    //     //     $formulaire = array();
+    //     //     $formulaire[] = $this->createForm(UpdateUsersType::class, $user);    
+    //     //     $formulaire[$key]->handleRequest($request);
             
-        //     if($formulaire[$key]->isSubmitted() && $formulaire[$key]->isValid()) {
-        //         $updateUsers->setArticle($article);
-        //         $gestionnaire = $this->getDoctrine()->getManager();
-        //         $gestionnaire->persist($updateUsers);
-        //         $gestionnaire->flush();
-        //     }
-        // }
+    //     //     if($formulaire[$key]->isSubmitted() && $formulaire[$key]->isValid()) {
+    //     //         $updateUsers->setArticle($article);
+    //     //         $gestionnaire = $this->getDoctrine()->getManager();
+    //     //         $gestionnaire->persist($updateUsers);
+    //     //         $gestionnaire->flush();
+    //     //     }
+    //     // }
 
-        return $this->render("admin/admin.html.twig", array(
-            'users' => $users,
-            'security' => $roles
-        ));
-    }
+    //     return $this->render("admin/admin.html.twig", array(
+    //         'users' => $users,
+    //         'security' => $roles
+    //     ));
+    // }
 }
